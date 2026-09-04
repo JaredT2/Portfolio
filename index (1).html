@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jared Too — UI/UX Design</title>
+<meta name="description" content="Jared Too designs interfaces for people who are still learning. Information Engineering at NTU, Singapore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f0f1ed;
+  --paper-deep:#e4e6e0;
+  --ink:#14181a;
+  --ink-soft:#5c6461;
+  --pine:#1f5f5b;
+  --brass:#9d7c22;
+  --rule:rgba(20,24,26,.16);
+  --measure:34rem;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;
+  font-size:1.0625rem;
+  line-height:1.6;
+  font-weight:400;
+}
+::selection{background:var(--pine);color:var(--paper)}
+
+a{color:inherit}
+img{max-width:100%;display:block}
+
+.wrap{
+  width:min(72rem,100% - 3rem);
+  margin-inline:auto;
+}
+@media(max-width:40rem){ .wrap{width:calc(100% - 2rem)} }
+
+/* ---------- fret grid: hairlines that mark the layout skeleton ---------- */
+.fretlines{
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:0;
+  display:none;
+}
+@media(min-width:64rem){
+  .fretlines{display:block}
+  .fretlines span{
+    position:absolute;top:0;bottom:0;width:1px;
+    background:var(--rule);opacity:.5;
+  }
+}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.topbar .wrap{
+  display:flex;align-items:baseline;gap:1.5rem;
+  padding:.85rem 0;
+}
+.wordmark{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:800;font-size:1.05rem;letter-spacing:-.02em;
+  text-decoration:none;margin-right:auto;
+}
+.topbar nav{display:flex;gap:1.4rem;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.9rem;font-weight:400}
+.topbar nav a{text-decoration:none;color:var(--ink-soft);padding-bottom:2px;border-bottom:1px solid transparent}
+.topbar nav a:hover,.topbar nav a:focus-visible{color:var(--ink);border-bottom-color:var(--pine)}
+@media(max-width:44rem){ .topbar nav a:nth-child(2){display:none} }
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(4rem,13vw,9rem) 0 clamp(3rem,7vw,5rem);position:relative;z-index:1}
+.hero h1{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:800;
+  font-size:clamp(2.6rem,8.2vw,6.2rem);
+  line-height:.94;
+  letter-spacing:-.035em;
+  margin:0 0 1.75rem;
+  max-width:16ch;
+}
+.hero h1 em{font-style:normal;color:var(--pine)}
+.hero p{
+  max-width:var(--measure);
+  font-size:clamp(1.05rem,1.6vw,1.25rem);
+  line-height:1.62;
+  margin:0 0 1.1rem;
+  color:var(--ink);
+}
+.hero .meta{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.9rem;color:var(--ink-soft);margin-top:2.25rem;
+}
+
+/* ---------- section headings ---------- */
+.band{padding:clamp(3rem,7vw,5.5rem) 0;position:relative;z-index:1}
+.band + .band{border-top:1px solid var(--rule)}
+.band > .wrap > h2{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:600;font-size:1.15rem;letter-spacing:-.01em;
+  margin:0 0 2.5rem;
+  color:var(--ink-soft);
+}
+
+/* ---------- work rows ---------- */
+.project{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:center;
+  padding:clamp(2rem,4vw,3rem) 0;
+  border-top:1px solid var(--rule);
+}
+.project:last-child{border-bottom:1px solid var(--rule)}
+.project:nth-child(even) .shot{order:2}
+@media(max-width:52rem){
+  .project{grid-template-columns:1fr}
+  .project:nth-child(even) .shot{order:0}
+}
+
+.shot{
+  aspect-ratio:4/3;
+  background:var(--paper-deep);
+  border:1px solid var(--rule);
+  overflow:hidden;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.shot img{width:100%;height:100%;object-fit:cover}
+.shot .ph{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.8rem;color:var(--ink-soft);text-align:center;padding:1rem;
+}
+
+.project-body h3{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:800;
+  font-size:clamp(1.5rem,3vw,2.1rem);
+  line-height:1.05;letter-spacing:-.025em;
+  margin:0 0 .6rem;
+}
+.project-body .role{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.88rem;color:var(--ink-soft);margin:0 0 1rem;
+}
+.project-body p.lede{margin:0 0 1.4rem;max-width:38ch;line-height:1.6}
+
+.tag{
+  display:inline-block;
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.75rem;font-weight:600;
+  color:var(--brass);
+  border:1px solid currentColor;
+  padding:.12rem .5rem;
+  margin-bottom:.9rem;
+}
+
+.open{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:600;font-size:.95rem;
+  background:none;border:0;padding:0;
+  color:var(--pine);cursor:pointer;
+  border-bottom:2px solid var(--pine);
+  line-height:1.3;
+}
+.open:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* ---------- experience ---------- */
+.job{
+  display:grid;grid-template-columns:9rem 1fr;
+  gap:1.5rem;
+  padding:1.4rem 0;
+  border-top:1px solid var(--rule);
+}
+.job:last-child{border-bottom:1px solid var(--rule)}
+.job .when{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.85rem;color:var(--ink-soft);padding-top:.28rem;
+}
+.job h3{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:600;font-size:1.05rem;margin:0 0 .3rem;letter-spacing:-.01em;
+}
+.job p{margin:0;max-width:52ch;color:var(--ink-soft);font-size:1rem}
+@media(max-width:44rem){ .job{grid-template-columns:1fr;gap:.3rem} }
+
+/* ---------- about ---------- */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem)}
+@media(max-width:52rem){ .about{grid-template-columns:1fr} }
+.about p{max-width:var(--measure);margin:0 0 1.1rem}
+
+/* ---------- contact ---------- */
+.contact h2{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:800;font-size:clamp(2rem,5.5vw,3.6rem);
+  line-height:1;letter-spacing:-.03em;margin:0 0 1.75rem;color:var(--ink);
+}
+.links{display:flex;flex-wrap:wrap;gap:1.75rem;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1rem}
+.links a{color:var(--pine);text-decoration:none;border-bottom:2px solid var(--pine);padding-bottom:2px}
+.links a:hover,.links a:focus-visible{color:var(--ink);border-bottom-color:var(--ink)}
+
+footer{padding:3rem 0 4rem;border-top:1px solid var(--rule);position:relative;z-index:1}
+footer p{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin:0}
+
+/* ---------- case study overlay ---------- */
+.study{
+  position:fixed;inset:0;z-index:60;
+  background:var(--paper);
+  overflow-y:auto;
+  visibility:hidden;opacity:0;
+}
+.study[data-open="true"]{visibility:visible;opacity:1}
+.study-inner{padding:clamp(2rem,6vw,5rem) 0 6rem}
+.study .close{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-size:.92rem;font-weight:600;
+  background:none;border:0;padding:0;color:var(--pine);cursor:pointer;
+  border-bottom:2px solid var(--pine);margin-bottom:2.5rem;
+}
+.study h2{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:800;font-size:clamp(2rem,6vw,4rem);
+  line-height:1;letter-spacing:-.03em;margin:0 0 .75rem;max-width:18ch;
+}
+.study .sub{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--ink-soft);font-size:.95rem;margin:0 0 3rem}
+.study section{margin-bottom:2.75rem;max-width:var(--measure)}
+.study section h3{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:600;font-size:1rem;margin:0 0 .7rem;color:var(--pine);
+}
+.study section p{margin:0 0 1rem;line-height:1.68}
+.study ul{margin:0 0 1rem;padding-left:1.1rem}
+.study li{margin-bottom:.5rem;line-height:1.6}
+.study .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem;max-width:none}
+
+:focus-visible{outline:2px solid var(--pine);outline-offset:3px}
+@media(prefers-reduced-motion:no-preference){
+  .study{transition:opacity .22s ease,visibility .22s}
+}
+</style>
+</head>
+<body>
+
+<div class="fretlines" aria-hidden="true">
+  <span style="left:12%"></span><span style="left:34%"></span>
+  <span style="left:56%"></span><span style="left:78%"></span>
+</div>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="#top">Jared Too</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero wrap">
+    <h1>I design for the gap <em>between lessons</em>.</h1>
+    <p>For three years I taught seven complete beginners to play guitar and piano. Almost none of them quit during a lesson. They quit in the six days afterwards, when nobody was there to tell them what to do next.</p>
+    <p>That gap is a design problem, and it is the one I keep coming back to.</p>
+    <p class="meta">Information Engineering at Nanyang Technological University, Singapore. Looking for a UI/UX internship.</p>
+  </div>
+
+  <!-- ============ WORK ============ -->
+  <div class="band" id="work">
+    <div class="wrap">
+      <h2>Selected work</h2>
+
+      <article class="project">
+        <div class="shot">
+          <img src="images/practice-companion.png" alt="Practice Companion interface"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/practice-companion.png'}))">
+        </div>
+        <div class="project-body">
+          <span class="tag">In progress</span>
+          <h3>Practice Companion</h3>
+          <p class="role">Product designer and developer &middot; 2026</p>
+          <p class="lede">A web app that carries a music lesson home with the student, so they can troubleshoot a chord shape without the teacher in the room.</p>
+          <button class="open" data-study="practice">Read the case study</button>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="shot">
+          <img src="images/sendwich.png" alt="Sendwich app screens"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/sendwich.png'}))">
+        </div>
+        <div class="project-body">
+          <h3>Sendwich</h3>
+          <p class="role">Product designer &middot; 2024</p>
+          <p class="lede">A sandwich-ordering app built around a hard trade-off: fewer taps to order, without taking away the customisation people actually cared about.</p>
+          <button class="open" data-study="sendwich">Read the case study</button>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="shot">
+          <img src="images/illustration.png" alt="Illustration series"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/illustration.png'}))">
+        </div>
+        <div class="project-body">
+          <h3>Identity and visual storytelling</h3>
+          <p class="role">Illustrator &middot; 2024&ndash;2025</p>
+          <p class="lede">Twenty digital pieces on identity, made to hold one visual language across a series rather than read as twenty separate drawings.</p>
+          <button class="open" data-study="illustration">See the series</button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <div class="band" id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+
+      <div class="job">
+        <div class="when">2023 &ndash; present</div>
+        <div>
+          <h3>Freelance piano and guitar instructor</h3>
+          <p>Seven beginners with no prior musical training, taught alongside national service and full-time study. Every lesson plan built around what that student wanted to play. Two students came by referral.</p>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="when">May &ndash; Jul 2026</div>
+        <div>
+          <h3>Product technician, Lincstech Circuits Singapore</h3>
+          <p>Assembly and quality control on 200+ printed circuit boards per shift. Every board inspected by hand after each process stage.</p>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="when">Mar &ndash; Aug 2024</div>
+        <div>
+          <h3>Instructor and logistics support, Twokii</h3>
+          <p>Safety briefings and supervision for classes of ten or more children on night cycling trips and hikes. Four excursions, no injuries.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <div class="band" id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <div class="about">
+        <div>
+          <p>My degree is an odd hybrid. Electrical engineering underneath, communications and media studies on top. It means I spent one semester on signal processing and the next on how people read an image, which turned out to be better preparation for design than either subject alone.</p>
+          <p>I am partway through the Google UX Design certificate, which has put method behind instincts I first picked up teaching.</p>
+        </div>
+        <div>
+          <p>The teaching is the part that matters most to how I work. You cannot bluff a beginner. If your explanation is bad, their hand goes to the wrong fret and you find out in four seconds. Three years of that is a decent substitute for a usability lab.</p>
+          <p>I draw as well, mostly in Procreate. It is where I learned that a series holds together through restraint, not variety.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CONTACT ============ -->
+  <div class="band contact" id="contact">
+    <div class="wrap">
+      <h2>Available for a 2027 internship.</h2>
+      <div class="links">
+        <a href="mailto:jtoo003@e.ntu.edu.sg">jtoo003@e.ntu.edu.sg</a>
+        <a href="https://www.linkedin.com/in/jared-too-0bb7252b4/">LinkedIn</a>
+        <a href="https://instagram.com/YOUR_HANDLE">Instagram</a>
+        <a href="Jared_Too_Resume.pdf">Résumé (PDF)</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap"><p>Built and maintained by Jared Too, Singapore.</p></div>
+  </footer>
+</main>
+
+<!-- ============ CASE STUDY OVERLAY ============ -->
+<div class="study" id="study" role="dialog" aria-modal="true" aria-labelledby="study-title">
+  <div class="wrap study-inner">
+    <button class="close" id="study-close">Back to work</button>
+    <h2 id="study-title"></h2>
+    <p class="sub" id="study-sub"></p>
+    <div id="study-body"></div>
+  </div>
+</div>
+
+<script>
+const STUDIES = {
+  practice: {
+    title: "Practice Companion",
+    sub: "Product designer and developer &middot; 2026 &middot; In progress",
+    body: `
+      <section>
+        <h3>The problem</h3>
+        <p>Across three years and seven beginner students, I watched the same two things end people's playing, and neither happened during a lesson.</p>
+        <p>The first is memory. A student leaves understanding a chord shape perfectly well, and by Wednesday cannot remember which finger goes where. There is nobody to ask, so they practise it wrong or they do not practise at all.</p>
+        <p>The second is specific to guitar. The first few weeks hurt. Fingertips are not calloused yet, pressing steel strings is genuinely painful, and there is no visible progress to weigh against the discomfort. Most people who quit guitar quit here.</p>
+      </section>
+      <section>
+        <h3>What I am building</h3>
+        <p>A web app that closes the loop between lessons rather than replacing them.</p>
+        <ul>
+          <li>Lesson notes the teacher writes at the end of each session, so the student opens exactly what was covered rather than a generic tutorial.</li>
+          <li>Annotated chord and finger-placement diagrams, so the most common at-home failure is self-correctable.</li>
+          <li>A weekly practice view that makes the small amount of progress in week three visible, because that is the week people give up.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Where it stands</h3>
+        <p>Currently at prototype stage. The next step is usability testing with four of my current students, which is a rare luxury: the test participants are the actual users, and I already know their skill level and their failure points.</p>
+        <p>This section will be replaced with findings once that testing is done, including whatever I got wrong.</p>
+      </section>`
+  },
+  sendwich: {
+    title: "Sendwich",
+    sub: "Product designer &middot; 2024 &middot; Google UX Design certificate project",
+    body: `
+      <section>
+        <h3>The problem</h3>
+        <p>Mobile food ordering has a trade-off most apps resolve badly. Give people every customisation option and ordering a sandwich takes two minutes of scrolling. Strip the options out and people cannot order the thing they actually want.</p>
+        <p>I interviewed four people about how they order food on their phones and built personas and journey maps from what they described, which gave me a feature list ranked by what they cared about rather than what was easy to build.</p>
+      </section>
+      <section>
+        <h3>What I did</h3>
+        <ul>
+          <li>Three full iterations of wireframes and high-fidelity screens in Figma.</li>
+          <li>Usability testing after each round, fixing navigation and layout problems before moving on rather than at the end.</li>
+          <li>Rebuilt the ordering flow around the customisations testers ranked as essential, and defaulted the rest.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>What I learned</h3>
+        <p>The instinct to cut options to make something faster is usually wrong. The options were not the problem, the ordering of them was. Once the two or three choices people cared about came first, the rest could sit behind a default without anyone missing them.</p>
+      </section>
+      <section>
+        <h3>Screens</h3>
+        <div class="gallery">
+          <div class="shot"><div class="ph">images/sendwich-01.png</div></div>
+          <div class="shot"><div class="ph">images/sendwich-02.png</div></div>
+          <div class="shot"><div class="ph">images/sendwich-03.png</div></div>
+        </div>
+      </section>`
+  },
+  illustration: {
+    title: "Identity and visual storytelling",
+    sub: "Illustrator &middot; 2024&ndash;2025 &middot; Procreate",
+    body: `
+      <section>
+        <h3>The series</h3>
+        <p>Twenty digital pieces on identity, published one at a time. The constraint I set was that any two pieces pulled from the set at random should read as belonging together: shared palette discipline, consistent handling of figure and negative space, one visual grammar throughout.</p>
+      </section>
+      <section>
+        <h3>Working in public</h3>
+        <p>Posting on a schedule rather than when a piece felt finished changed how I worked. It built an audience of over a hundred followers and five hundred combined views, and it meant I could see which ideas held people's attention and follow them into later pieces.</p>
+      </section>
+      <section>
+        <h3>Selected pieces</h3>
+        <div class="gallery">
+          <div class="shot"><div class="ph">images/art-01.png</div></div>
+          <div class="shot"><div class="ph">images/art-02.png</div></div>
+          <div class="shot"><div class="ph">images/art-03.png</div></div>
+          <div class="shot"><div class="ph">images/art-04.png</div></div>
+        </div>
+      </section>`
+  }
+};
+
+const overlay  = document.getElementById('study');
+const elTitle  = document.getElementById('study-title');
+const elSub    = document.getElementById('study-sub');
+const elBody   = document.getElementById('study-body');
+const btnClose = document.getElementById('study-close');
+let lastFocus = null;
+
+function openStudy(key, push = true){
+  const s = STUDIES[key];
+  if(!s) return;
+  elTitle.textContent = s.title;
+  elSub.innerHTML = s.sub;
+  elBody.innerHTML = s.body;
+  overlay.dataset.open = 'true';
+  document.body.style.overflow = 'hidden';
+  overlay.scrollTop = 0;
+  if(push && location.hash !== '#' + key) history.pushState({study:key}, '', '#' + key);
+  btnClose.focus();
+}
+
+function closeStudy(pop = true){
+  overlay.dataset.open = 'false';
+  document.body.style.overflow = '';
+  if(pop && location.hash.slice(1) in STUDIES) history.pushState({}, '', location.pathname);
+  if(lastFocus) lastFocus.focus();
+}
+
+document.querySelectorAll('.open').forEach(btn => {
+  btn.addEventListener('click', () => {
+    lastFocus = btn;
+    openStudy(btn.dataset.study);
+  });
+});
+
+btnClose.addEventListener('click', () => closeStudy());
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && overlay.dataset.open === 'true') closeStudy();
+});
+
+window.addEventListener('popstate', () => {
+  const key = location.hash.slice(1);
+  if(key in STUDIES) openStudy(key, false); else closeStudy(false);
+});
+
+// deep link on load
+const initial = location.hash.slice(1);
+if(initial in STUDIES) openStudy(initial, false);
+</script>
+</body>
+</html>
