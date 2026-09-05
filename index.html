@@ -217,8 +217,9 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/practice-01-week.jpg" alt="Practice Companion interface" loading="lazy"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/practice-01-week.jpg'}))">
+          <img src="images/thumbs/practice-01-week.jpg" alt="Practice Companion" loading="lazy"
+               data-try="images/practice-01-week.jpg|images/practice-01-week.png"
+               data-name="images/practice-01-week.jpg" onerror="imgFallback(this)">
         </div>
         <div class="pbody">
           <span class="tag">In progress</span>
@@ -234,7 +235,9 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/sendwich-hero.jpg" alt="Sendwich app screens" loading="lazy">
+          <img src="images/thumbs/sendwich-hero.jpg" alt="Sendwich app screens" loading="lazy"
+               data-try="images/sendwich-hero.jpg|images/sendwich-hero.png"
+               data-name="images/sendwich-hero.jpg" onerror="imgFallback(this)">
         </div>
         <div class="pbody">
           <h3>Sendwich</h3>
@@ -249,8 +252,9 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/contrast-final.jpg" alt="Drip is forever" loading="lazy"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/contrast-final.jpg'}))">
+          <img src="images/thumbs/contrast-final.jpg" alt="Drip is forever" loading="lazy"
+               data-try="images/contrast-final.jpg|images/contrast-final.png"
+               data-name="images/contrast-final.jpg" onerror="imgFallback(this)">
         </div>
         <div class="pbody">
           <h3>Contrast</h3>
@@ -264,8 +268,9 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/art-06-lucky-bite-colour.jpg" alt="A Lucky Bite illustration" loading="lazy"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/art-06-lucky-bite-colour.jpg'}))">
+          <img src="images/thumbs/art-06-lucky-bite-colour.jpg" alt="A Lucky Bite illustration" loading="lazy"
+               data-try="images/art-06-lucky-bite-colour.jpg|images/art-06-lucky-bite-colour.png"
+               data-name="images/art-06-lucky-bite-colour.jpg" onerror="imgFallback(this)">
         </div>
         <div class="pbody">
           <h3>Ink Studies</h3>
@@ -358,6 +363,18 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 </div>
 
 <script>
+/* Images fall back through a chain: thumbnail, then full size, then .png,
+   then a labelled grey box so a missing file is always visible, never silent. */
+function imgFallback(el){
+  const q = (el.dataset.try||'').split('|').filter(Boolean);
+  if(q.length){ el.dataset.try = q.slice(1).join('|'); el.src = q[0]; return; }
+  const box = document.createElement('div');
+  box.className = 'ph';
+  box.textContent = el.dataset.name || 'missing image';
+  el.replaceWith(box);
+}
+const alt2 = s => s.replace(/\.jpg$/,'.png');
+
 /* =========================================================
    ILLUSTRATION SERIES
    To add a piece: copy a block, drop the image into images/
@@ -436,7 +453,7 @@ const FIGMA = 'https://www.figma.com/proto/KX52FCnL7hYj2u4tUKTGJA/sandwich-deliv
 
 const plate = (src,cap) =>
   `<figure class="plate"><img src="images/${src}" alt="${cap}" loading="lazy"
-     onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'shot',innerHTML:'<div class=\\'ph\\'>images/${src}</div>'}))">
+     data-try="images/${alt2(src)}" data-name="images/${src}" onerror="imgFallback(this)">
    <figcaption>${cap}</figcaption></figure>`;
 
 const STUDIES = {
@@ -579,7 +596,8 @@ gallery.innerHTML = ART.map(a=>`
   <button class="tile" data-art="${a.id}">
     <span class="frame">
       <img src="images/thumbs/${a.images[0]}" alt="${a.title}" loading="lazy"
-        onerror="this.onerror=null;this.src='images/${a.images[0]}'">
+        data-try="images/${a.images[0]}|images/${alt2(a.images[0])}"
+        data-name="images/${a.images[0]}" onerror="imgFallback(this)">
     </span>
     <span class="t">${a.title}</span><br><span class="y">${a.year}</span>
   </button>`).join('');
