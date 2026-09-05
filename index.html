@@ -58,6 +58,8 @@ a{color:inherit}
   font-size:1rem;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;margin-right:auto;
 }
 .topbar nav{display:flex;gap:1.35rem}
+.topbar nav button.linklike{color:var(--grey);border-bottom:2px solid transparent;padding-bottom:2px}
+.topbar nav button.linklike:hover{color:var(--ink);border-bottom-color:var(--blue)}
 .topbar nav a{text-decoration:none;color:var(--grey);padding-bottom:2px;border-bottom:2px solid transparent}
 .topbar nav a:hover{color:var(--ink);border-bottom-color:var(--blue)}
 @media(max-width:40rem){.topbar nav a:nth-child(3){display:none}.topbar nav{gap:1rem}}
@@ -158,9 +160,10 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 .study[data-open="true"]{visibility:visible;opacity:1}
 .study-inner{padding:clamp(1.5rem,4vw,3rem) 0 6rem}
 .close{
+  margin-bottom:0;
   font-variation-settings:'wdth' 112,'wght' 700;
   font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
-  border-bottom:2px solid var(--blue);padding-bottom:2px;margin-bottom:2.5rem;
+  border-bottom:2px solid var(--blue);padding-bottom:2px;
   display:inline-flex;gap:.5rem;align-items:center;
 }
 .close:hover{color:var(--blue)}
@@ -186,6 +189,67 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
   .study{transition:opacity .2s ease,visibility .2s}
   .tile .frame,.shot,.link,.topbar nav a{transition:background .15s ease,color .15s ease,border-color .15s ease}
 }
+
+/* ---------- hero actions + scroll cue ---------- */
+.actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem}
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:3rem;padding:0 1.5rem;border:2px solid var(--ink);border-radius:2px;
+  font-variation-settings:'wdth' 115,'wght' 700;
+  font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
+}
+.cta.solid{background:var(--ink);color:var(--paper)}
+.cta.solid:hover{background:var(--blue);border-color:var(--blue)}
+.cta.hollow:hover{background:var(--ink);color:var(--paper)}
+.cue{
+  margin-top:3.5rem;display:inline-flex;align-items:center;gap:.6rem;
+  color:var(--grey);font-variation-settings:'wdth' 115,'wght' 600;
+  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+}
+.cue span{display:inline-block}
+@media(prefers-reduced-motion:no-preference){
+  .cue span{animation:nudge 2.2s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+}
+
+/* ---------- phone screenshots, side by side ---------- */
+.phones{display:flex;gap:1.5rem;flex-wrap:wrap;margin:1.75rem 0;max-width:none}
+.phonefig{flex:1 1 11rem;max-width:15rem;margin:0}
+.phonefig img{
+  width:100%;border:1px solid var(--ink);border-radius:12px;
+  background:var(--paper-2);
+}
+.phonefig figcaption{
+  margin-top:.7rem;color:var(--grey);
+  font-variation-settings:'wdth' 112,'wght' 600;
+  font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;line-height:1.5;
+}
+.phonefig .n{color:var(--blue);display:block}
+@media(prefers-reduced-motion:no-preference){
+  .phonefig img{animation:lift 6s ease-in-out infinite}
+  .phonefig:nth-child(2) img{animation-delay:2s}
+  .phonefig:nth-child(3) img{animation-delay:4s}
+  @keyframes lift{
+    0%,72%,100%{box-shadow:none}
+    12%,60%{box-shadow:0 0 0 3px var(--blue)}
+  }
+}
+
+/* ---------- sticky + bottom navigation inside a case study ---------- */
+.studybar{
+  position:sticky;top:0;z-index:5;background:var(--paper);
+  padding:.9rem 0 1rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line);
+}
+.studyfoot{
+  margin-top:3.5rem;padding-top:2rem;border-top:2px solid var(--ink);
+  display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;
+}
+
+/* ---------- scroll reveal ---------- */
+@media(prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(16px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease}
+}
 </style>
 </head>
 <body>
@@ -197,6 +261,7 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
       <a href="#work">Work</a>
       <a href="#illustration">Illustration</a>
       <a href="#experience">Experience</a>
+      <button class="linklike" data-study="about">About</button>
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -204,10 +269,14 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
 <main id="top">
   <section class="hero wrap">
+    <p class="label" style="color:var(--grey);margin:0 0 1.5rem">UI/UX design &middot; Singapore</p>
     <h1>I design for the gap <em>between lessons</em>.</h1>
-    <p>For three years I taught seven complete beginners to play guitar and piano. Almost none of them quit during a lesson. They quit in the six days afterwards, when nobody was there to tell them what to do next.</p>
-    <p>I also draw — mostly food, usually turning into something it should not be. Both habits come from the same place: looking at something ordinary for long enough that it goes strange.</p>
-    <p class="meta">Information Engineering at Nanyang Technological University, Singapore. Looking for a UI/UX internship.</p>
+    <p>Three years teaching seven beginners taught me where people actually give up. Now I build for that moment.</p>
+    <div class="actions">
+      <a class="cta solid" href="#work">See the work</a>
+      <button class="cta hollow" data-study="about">About me</button>
+    </div>
+    <p class="cue"><span>&darr;</span> Four projects</p>
   </section>
 
   <!-- ================= WORK ================= -->
@@ -300,38 +369,49 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
         <div class="when">2023 — present</div>
         <div>
           <h3>Freelance piano and guitar instructor</h3>
-          <p>Seven beginners with no prior musical training, taught alongside national service and full-time study. Every lesson plan built around what that student wanted to play. Two students arrived by referral.</p>
+          <p>Seven beginners, no prior training, taught alongside national service and full-time study. Lesson plans built around what each student wanted to play. Two arrived by referral.</p>
         </div>
       </div>
       <div class="job">
         <div class="when">May — Jul 2026</div>
         <div>
           <h3>Product technician, Lincstech Circuits Singapore</h3>
-          <p>Assembly and quality control on 200+ printed circuit boards per shift. Every board inspected by hand after each process stage.</p>
+          <p>Assembly and quality control on 200+ circuit boards per shift, every one inspected by hand.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Jun — Aug 2026</div>
+        <div>
+          <h3>Sales associate, Guzman y Gomez</h3>
+          <p>Till, fryer and assembly line through rush service. Food safety certified.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Aug 2025 — Jun 2026</div>
+        <div>
+          <h3>Jamband captain, NTU Hall of Residence 15</h3>
+          <p>Ran rehearsals and set planning for a student band across an academic year.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Apr — Aug 2025</div>
+        <div>
+          <h3>Cafe server, Common Man Coffee Roasters</h3>
+          <p>Fast, high-pressure service. Trained in coffee preparation through an in-house workshop.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Jan 2020 — Jan 2021</div>
+        <div>
+          <h3>Server and dishwasher, Myung Ga BBQ · Auckland</h3>
+          <p>Orders were tracked by hand and mistakes were constant, so I proposed and introduced a duplicate-order system that cut them. The first time I fixed a workflow instead of just working inside it.</p>
         </div>
       </div>
       <div class="job">
         <div class="when">Mar — Aug 2024</div>
         <div>
           <h3>Instructor and logistics support, Twokii</h3>
-          <p>Safety briefings and supervision for classes of ten or more children on night cycling trips and hikes. Four excursions, no injuries.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ABOUT ================= -->
-  <section class="band" id="about">
-    <div class="wrap">
-      <h2>About</h2>
-      <div class="two">
-        <div>
-          <p>My degree is an odd hybrid. Electrical engineering underneath, communications and media studies on top. One semester on signal processing, the next on how people read an image. It turned out to be better preparation for design than either subject would have been alone.</p>
-          <p>I am partway through the Google UX Design certificate, which put method behind instincts I first picked up teaching.</p>
-        </div>
-        <div>
-          <p>The teaching is the part that matters most to how I work. You cannot bluff a beginner. If your explanation is bad, their hand goes to the wrong fret and you find out in four seconds. Three years of that is a reasonable substitute for a usability lab.</p>
-          <p>The drawing taught me the opposite lesson: that a series holds together through restraint, and that the most ordinary object in a room is usually the one worth looking at hardest.</p>
+          <p>Safety briefings and supervision for classes of ten or more children. Four excursions, no injuries.</p>
         </div>
       </div>
     </div>
@@ -355,7 +435,7 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
 <div class="study" id="study" role="dialog" aria-modal="true" aria-labelledby="study-title">
   <div class="wrap study-inner">
-    <button class="close" id="study-close"><span>&larr;</span>Back</button>
+    <div class="studybar"><button class="close" id="study-close"><span>&larr;</span>Back</button></div>
     <h2 id="study-title"></h2>
     <p class="sub" id="study-sub"></p>
     <div id="study-body"></div>
@@ -456,16 +536,47 @@ const plate = (src,cap) =>
      data-try="images/${alt2(src)}" data-name="images/${src}" onerror="imgFallback(this)">
    <figcaption>${cap}</figcaption></figure>`;
 
+const phones = items => `<div class="phones">` + items.map((it,i)=>
+  `<figure class="phonefig"><img src="images/${it.src}" alt="${it.cap}" loading="lazy"
+     data-try="images/${alt2(it.src)}" data-name="images/${it.src}" onerror="imgFallback(this)">
+   <figcaption><span class="n">${String(i+1).padStart(2,'0')}</span>${it.cap}</figcaption></figure>`).join('') + `</div>`;
+
 const STUDIES = {
+  about:{
+    title:'About',
+    sub:'Jared Too · Singapore',
+    body:`
+      <section>
+        <p>I study Information Engineering at NTU — electrical engineering underneath, communications and media on top. One semester on signal processing, the next on how people read an image.</p>
+        <p>For three years I taught seven complete beginners to play guitar and piano. You cannot bluff a beginner: if your explanation is bad, their hand goes to the wrong fret and you find out in four seconds. That is where I learned to design.</p>
+        <p>I also draw, mostly food turning into something it should not be. Partway through the Google UX Design certificate. Looking for a 2027 UI/UX internship.</p>
+      </section>
+      <section>
+        <h3>Tools</h3>
+        <p>Figma, Procreate, Photoshop, Canva. HTML, CSS and JavaScript for building what I design. Java, Python and C from the degree.</p>
+        <h3>Methods</h3>
+        <p>User interviews, personas, journey mapping, wireframing, prototyping, usability and accessibility testing.</p>
+      </section>
+      <section>
+        <h3>Elsewhere</h3>
+        <div class="links-inline">
+          <a class="link" href="mailto:jtoo003@e.ntu.edu.sg">Email</a>
+          <a class="link" href="https://www.linkedin.com/in/jared-too-0bb7252b4/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="link" href="https://www.instagram.com/anpan_illustrations" target="_blank" rel="noopener">Instagram</a>
+          <a class="link" href="Jared_Too_Resume.pdf">Résumé</a>
+        </div>
+      </section>`
+  },
+
   practice:{
     title:'Practice Companion',
     sub:'Product designer and developer · 2026 · In progress',
     body:`
       <section>
         <h3>The problem</h3>
-        <p>Across three years and seven beginner students, I watched the same two things end people's playing. Neither happened during a lesson.</p>
-        <p>The first is memory. A student leaves understanding a chord shape perfectly well, and by Wednesday cannot remember which finger goes where. There is nobody to ask, so they practise it wrong, or they do not practise at all.</p>
-        <p>The second is specific to guitar. The first few weeks hurt. Fingertips are not calloused, pressing steel strings is genuinely painful, and there is no visible progress to set against the discomfort. Most people who quit guitar quit here.</p>
+        <p>Two things ended people's playing, and neither happened during a lesson.</p>
+        <p>Memory. A student leaves understanding a chord shape, and by Wednesday cannot remember which finger goes where. Nobody to ask, so they practise it wrong or not at all.</p>
+        <p>And pain. The first weeks hurt, with no visible progress to set against it. Most people who quit guitar quit here.</p>
       </section>
       <section>
         <h3>What I built</h3>
@@ -479,21 +590,24 @@ const STUDIES = {
       <section>
         <h3>Two decisions worth defending</h3>
         <h4>No sound files.</h4>
-        <p>Every chord is synthesised from string frequencies at runtime using a plucked-string model. Nothing to host, nothing to maintain, and any chord added later works automatically. The constraint was that the whole thing had to run as static files with no server.</p>
+        <p>Every chord is synthesised from string frequencies at runtime. Nothing to host, and any chord added later works automatically. The whole app runs as static files with no server.</p>
         <h4>One tap of feedback, not a form.</h4>
-        <p>Got it, getting there, struggling. The text box only appears after someone taps struggling. A beginner with a guitar in their lap will not fill in a form, and a feedback mechanism nobody uses tells the teacher nothing.</p>
+        <p>Got it, getting there, struggling. The text box appears only after struggling. A beginner with a guitar in their lap will not fill in a form, and feedback nobody gives tells the teacher nothing.</p>
       </section>
       <section>
         <h3>Where it stands</h3>
-        <p>The build is live and running on demo data. The next step is usability testing with four of my current students, which is a rare luxury: the participants are the actual users, and I already know their skill level and their failure points.</p>
-        <p>Two things I expect to be wrong. The finger-placement animation runs at 1.7 seconds a step, which is a guess. And the seven-day practice strip is meant to make small progress visible, but a row of empty marks could just as easily read as an accusation.</p>
+        <p>Live and running on demo data. Next is usability testing with four of my own students, who are the actual users.</p>
+        <p>Two things I expect to be wrong: the animation speed is a guess, and the seven-day strip meant to encourage could just as easily read as an accusation.</p>
         <p>This section gets replaced with findings once the testing is done, including whatever I got wrong.</p>
       </section>
       <section>
         <h3>The build</h3>
-        ${plate('practice-01-week.jpg','This week — practice items, chord card, and the seven-day strip')}
-        ${plate('practice-02-chord.jpg','A chord card: hear it, string by string, or watch the fingers go on in order')}
-        ${plate('practice-03-teacher.jpg','The teacher side — what each student flagged as hard since the last lesson')}
+        <p>Designed for a phone propped against something while both hands are on a guitar.</p>
+        ${phones([
+          {src:'practice-01-week.jpg',cap:'This week, with the seven-day strip'},
+          {src:'practice-02-chord.jpg',cap:'A chord: hear it, or watch the fingers go on'},
+          {src:'practice-03-teacher.jpg',cap:'What came back to the teacher'},
+        ])}
       </section>
       <p><a class="link" href="https://jaredt2.github.io/practice-companion/" target="_blank" rel="noopener">Try it live</a></p>`
   },
@@ -506,7 +620,7 @@ const STUDIES = {
       <section>
         <h3>The idea</h3>
         <p>Fashion and fit checks are everywhere on social media, and the word drip has been coined along the way to describe an outfit worth showing off. This piece looks at the contrast inside clothing itself: the balance between function and fashion.</p>
-        <p>As trends blur the line between practicality and aesthetics, I wanted to take the idea to its extreme. A fit check performed in an outfit completely wrong for the environment.</p>
+        <p>So I took it to the extreme: a fit check in an outfit completely wrong for the environment.</p>
         <p>The character stands in the heat of a desert in objectively warm, heavy clothing. He is dripping in both senses at once — his style intact, his body melting. The cool tones and thick, simplified lines of the background push his displacement further, setting a trend-driven identity against real-world practicality. It is a playful piece, but a critical one, about the distance between appearance and reality in fashion culture.</p>
       </section>
       <section>
@@ -528,6 +642,7 @@ const STUDIES = {
         ${plate('contrast-05-background.jpg','Simplified desert, deliberately underdrawn')}
         <h4>6. The caption</h4>
         <p>Drip is forever. On social media the word means an outfit worth having. Here it means the thing physically happening to him, because he is standing in a desert in a winter coat for the sake of the first meaning.</p>
+        ${plate('contrast-final.jpg','The finished piece')}
       </section>`
   },
 
@@ -576,8 +691,8 @@ const STUDIES = {
       </section>
       <section>
         <h3>What I took from it</h3>
-        <p>My instinct was that fewer options would make ordering faster. Testing said otherwise. The options were not the problem, the order of them was. Once the two or three choices people cared about came first, everything else could sit behind a sensible default without anyone missing it.</p>
-        <p>The other lesson was cheaper and more useful: I designed a one-way flow because I only ever imagined the ideal path. Real people change their minds halfway through a sandwich.</p>
+        <p>My instinct was that fewer options would make ordering faster. Testing said otherwise. The options were not the problem, their order was.</p>
+        <p>And I had designed a one-way flow because I only imagined the ideal path. Real people change their minds halfway through a sandwich.</p>
       </section>
       <section>
         <h3>Final design</h3>
@@ -621,7 +736,14 @@ let lastFocus=null;
 
 function openStudy(key,push=true){
   const s=STUDIES[key]; if(!s) return;
-  elT.textContent=s.title; elS.textContent=s.sub; elB.innerHTML=s.body;
+  elT.textContent=s.title; elS.textContent=s.sub;
+  elB.innerHTML = s.body + `
+    <div class="studyfoot">
+      <button class="cta hollow" data-close><span aria-hidden="true">&larr;</span>&nbsp;Back to work</button>
+      <button class="cta hollow" data-top>Top of page</button>
+    </div>`;
+  elB.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeStudy());
+  elB.querySelectorAll('[data-top]').forEach(b=>b.onclick=()=>overlay.scrollTo({top:0,behavior:'smooth'}));
   overlay.dataset.open='true';
   document.body.style.overflow='hidden';
   overlay.scrollTop=0;
@@ -646,6 +768,19 @@ window.addEventListener('popstate',()=>{
   const k=location.hash.slice(1);
   if(k in STUDIES) openStudy(k,false); else closeStudy(false);
 });
+/* Sections ease in as they arrive. Nothing moves for anyone who has asked
+   their system for reduced motion. */
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.project,.tile,.job,.band > .wrap > h2,.contact h2').forEach((el,i)=>{
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i%4*40)+'ms';
+    io.observe(el);
+  });
+}
+
 const initial=location.hash.slice(1);
 if(initial in STUDIES) openStudy(initial,false);
 </script>
