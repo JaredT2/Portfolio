@@ -217,8 +217,8 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/practice-companion.jpg" alt="Practice Companion interface" loading="lazy"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/practice-companion.jpg'}))">
+          <img src="images/practice-01-week.jpg" alt="Practice Companion interface" loading="lazy"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/practice-01-week.jpg'}))">
         </div>
         <div class="pbody">
           <span class="tag">In progress</span>
@@ -249,8 +249,23 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/art-01-choice-machine.jpg" alt="The Choice Machine illustration" loading="lazy"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/art-01-choice-machine.jpg'}))">
+          <img src="images/contrast-final.jpg" alt="Drip is forever" loading="lazy"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/contrast-final.jpg'}))">
+        </div>
+        <div class="pbody">
+          <h3>Contrast</h3>
+          <p class="role">Illustrator · 2025 · Procreate</p>
+          <p class="lede">A fit check in the wrong desert. One figure, dressed for a winter he is not in, melting for the sake of style.</p>
+          <div class="links-inline">
+            <button class="link" data-study="contrast">Read the process</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="shot">
+          <img src="images/art-06-lucky-bite-colour.jpg" alt="A Lucky Bite illustration" loading="lazy"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ph',textContent:'images/art-06-lucky-bite-colour.jpg'}))">
         </div>
         <div class="pbody">
           <h3>Ink Studies</h3>
@@ -384,7 +399,7 @@ const ART = [
   },
   {
     id:'life-in-patterns', title:'life in patterns', year:'2025',
-    images:['art-05-life-in-patterns.jpg','art-05-pattern-palette.jpg','art-05-monkey.jpg','art-05-cat.jpg','art-05-bear.jpg','art-05-octopus.jpg'],
+    images:['art-05-monkey.jpg','art-05-tapirs.jpg','art-05-whale.jpg','art-05-cat.jpg','art-05-bear.jpg','art-05-octopus.jpg','art-05-pattern-palette.jpg'],
     text:[
       `This series merges the mundane patterns of daily life with things I actually like: rock climbing, memes, pancakes and bagels, overweight cats. I mixed bold, playful Keith Haring-esque free lines with a thin semi-realistic pencil style to build depth and visual contrast into each piece.`,
       `The patterns came from public bus seats, MRT walls, tree bark. I compiled them into a small texture palette board and built quirky pieces from it, featuring my favourite animals doing my favourite activities.`,
@@ -457,7 +472,46 @@ const STUDIES = {
         <p>Two things I expect to be wrong. The finger-placement animation runs at 1.7 seconds a step, which is a guess. And the seven-day practice strip is meant to make small progress visible, but a row of empty marks could just as easily read as an accusation.</p>
         <p>This section gets replaced with findings once the testing is done, including whatever I got wrong.</p>
       </section>
+      <section>
+        <h3>The build</h3>
+        ${plate('practice-01-week.jpg','This week — practice items, chord card, and the seven-day strip')}
+        ${plate('practice-02-chord.jpg','A chord card: hear it, string by string, or watch the fingers go on in order')}
+        ${plate('practice-03-teacher.jpg','The teacher side — what each student flagged as hard since the last lesson')}
+      </section>
       <p><a class="link" href="https://jaredt2.github.io/practice-companion/" target="_blank" rel="noopener">Try it live</a></p>`
+  },
+
+  contrast:{
+    title:'Contrast',
+    sub:'Illustration · 2025 · Procreate',
+    body:`
+      ${plate('contrast-final.jpg','drip is forever — the finished piece')}
+      <section>
+        <h3>The idea</h3>
+        <p>Fashion and fit checks are everywhere on social media, and the word drip has been coined along the way to describe an outfit worth showing off. This piece looks at the contrast inside clothing itself: the balance between function and fashion.</p>
+        <p>As trends blur the line between practicality and aesthetics, I wanted to take the idea to its extreme. A fit check performed in an outfit completely wrong for the environment.</p>
+        <p>The character stands in the heat of a desert in objectively warm, heavy clothing. He is dripping in both senses at once — his style intact, his body melting. The cool tones and thick, simplified lines of the background push his displacement further, setting a trend-driven identity against real-world practicality. It is a playful piece, but a critical one, about the distance between appearance and reality in fashion culture.</p>
+      </section>
+      <section>
+        <h3>How it was made</h3>
+        <h4>1. Reference</h4>
+        <p>I took the pose from a TikTok fit check and traced over it, keeping the crossed arms and the downward tilt of the head that give the pose its posture.</p>
+        ${plate('contrast-01-reference.jpg','Tracing over the source pose')}
+        <h4>2. The figure</h4>
+        <p>Line work first, kept fine and detailed. Everything the figure wears is drawn as heavy, insulating, wrong for the place he is standing.</p>
+        ${plate('contrast-02-trace.jpg','Tracing the figure')}
+        <h4>3. The drip</h4>
+        <p>The melt is added into the line work rather than painted over it, so the clothes and the body are dissolving as one thing.</p>
+        ${plate('contrast-03-drip.jpg','Adding the drip')}
+        <h4>4. Colour</h4>
+        <p>Dark earth tones for the figure, chosen to sit against the light reddish sky that comes later. Warm clothing rendered in colours that absorb heat.</p>
+        ${plate('contrast-04-colour.jpg','Earthy tones on the figure')}
+        <h4>5. The background</h4>
+        <p>Thick, simple, almost childlike lines with no detail at all. Setting that against the fine rendering of the figure is what makes him look like he was pasted into a place he does not belong.</p>
+        ${plate('contrast-05-background.jpg','Simplified desert, deliberately underdrawn')}
+        <h4>6. The caption</h4>
+        <p>Drip is forever. On social media the word means an outfit worth having. Here it means the thing physically happening to him, because he is standing in a desert in a winter coat for the sake of the first meaning.</p>
+      </section>`
   },
 
   sendwich:{
@@ -524,8 +578,8 @@ const gallery = document.getElementById('gallery');
 gallery.innerHTML = ART.map(a=>`
   <button class="tile" data-art="${a.id}">
     <span class="frame">
-      <img src="images/${a.images[0]}" alt="${a.title}" loading="lazy"
-        onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'images/${a.images[0]}'}))">
+      <img src="images/thumbs/${a.images[0]}" alt="${a.title}" loading="lazy"
+        onerror="this.onerror=null;this.src='images/${a.images[0]}'">
     </span>
     <span class="t">${a.title}</span><br><span class="y">${a.year}</span>
   </button>`).join('');
