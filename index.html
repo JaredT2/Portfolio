@@ -65,19 +65,22 @@ a{color:inherit}
 @media(max-width:40rem){.topbar nav a:nth-child(3){display:none}.topbar nav{gap:1rem}}
 
 /* ---------- hero ---------- */
-.hero{padding:clamp(3.5rem,12vw,8rem) 0 clamp(3rem,7vw,5rem)}
+.hero{padding:clamp(2.25rem,5vw,3.5rem) 0 clamp(1.75rem,3vw,2.5rem)}
+.herogrid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:end}
+@media(max-width:56rem){.herogrid{grid-template-columns:1fr;gap:1.5rem;align-items:start}}
+.heroside p{margin:0 0 1.25rem;max-width:34ch;font-size:.98rem;color:#3a352c}
 .hero h1{
-  font-size:clamp(2.6rem,10.5vw,8.5rem);
-  text-transform:uppercase;margin:0 0 2.25rem;max-width:13ch;
+  font-size:clamp(2.2rem,6.6vw,4.9rem);
+  text-transform:uppercase;margin:0;max-width:14ch;
 }
 .hero h1 em{font-style:normal;color:var(--blue);-webkit-text-stroke:0}
-.hero p{max-width:var(--measure);font-size:clamp(1rem,1.4vw,1.14rem);margin:0 0 1rem;color:#33302a;line-height:1.6}
+
 .hero .meta{margin-top:2.25rem;color:var(--grey);letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;
   font-variation-settings:'wdth' 115,'wght' 600;max-width:44ch;line-height:1.7}
 
 /* ---------- bands ---------- */
-.band{padding:clamp(3rem,7vw,5.5rem) 0;border-top:2px solid var(--ink)}
-.band > .wrap > h2{color:var(--grey);margin:0 0 2.25rem}
+.band{padding:clamp(2.25rem,5vw,4rem) 0;border-top:2px solid var(--ink)}
+.band > .wrap > h2{color:var(--grey);margin:0 0 1.5rem}
 
 /* ---------- work ---------- */
 #work .wrap{counter-reset:proj}
@@ -100,6 +103,8 @@ a{color:inherit}
   overflow:hidden;display:flex;align-items:center;justify-content:center;
 }
 .shot img{width:100%;height:100%;object-fit:cover}
+.shot.contain{background:#fff;padding:.75rem}
+.shot.contain img{object-fit:contain}
 .shot .ph{font-size:.72rem;color:var(--grey);text-align:center;padding:1rem;font-family:ui-monospace,Menlo,monospace}
 .pbody h3{font-size:clamp(1.8rem,4vw,3.1rem);text-transform:uppercase;margin:0 0 .75rem}
 .pbody .role{color:var(--grey);margin:0 0 1rem;letter-spacing:.14em;font-size:.68rem}
@@ -191,7 +196,7 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 }
 
 /* ---------- hero actions + scroll cue ---------- */
-.actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem}
+.actions{display:flex;gap:.65rem;flex-wrap:wrap;margin:0}
 .cta{
   display:inline-flex;align-items:center;justify-content:center;
   min-height:3rem;padding:0 1.5rem;border:2px solid var(--ink);border-radius:2px;
@@ -269,14 +274,19 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
 <main id="top">
   <section class="hero wrap">
-    <p class="label" style="color:var(--grey);margin:0 0 1.5rem">UI/UX design &middot; Singapore</p>
-    <h1>I design for the gap <em>between lessons</em>.</h1>
-    <p>Three years teaching seven beginners taught me where people actually give up. Now I build for that moment.</p>
-    <div class="actions">
-      <a class="cta solid" href="#work">See the work</a>
-      <button class="cta hollow" data-study="about">About me</button>
+    <div class="herogrid">
+      <div>
+        <p class="label" style="color:var(--grey);margin:0 0 .9rem">Jared Too &middot; UI/UX design &middot; Singapore</p>
+        <h1>I design for the gap <em>between lessons</em>.</h1>
+      </div>
+      <div class="heroside">
+        <p>Three years teaching seven beginners taught me where people actually give up. Now I build for that moment.</p>
+        <div class="actions">
+          <a class="cta solid" href="#work">See the work</a>
+          <button class="cta hollow" data-study="about">About me</button>
+        </div>
+      </div>
     </div>
-    <p class="cue"><span>&darr;</span> Four projects</p>
   </section>
 
   <!-- ================= WORK ================= -->
@@ -286,9 +296,9 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/thumbs/practice-01-week.jpg" alt="Practice Companion" loading="lazy"
-               data-try="images/practice-01-week.jpg|images/practice-01-week.png"
-               data-name="images/practice-01-week.jpg" onerror="imgFallback(this)">
+          <img src="images/thumbs/practice-01-cover.jpg" alt="Practice Companion" loading="lazy"
+               data-try="images/practice-01-cover.jpg|images/practice-01-week.jpg"
+               data-name="images/practice-01-cover.jpg" onerror="imgFallback(this)">
         </div>
         <div class="pbody">
           <span class="tag">In progress</span>
@@ -320,7 +330,7 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
       </article>
 
       <article class="project">
-        <div class="shot">
+        <div class="shot contain">
           <img src="images/thumbs/contrast-final.jpg" alt="Drip is forever" loading="lazy"
                data-try="images/contrast-final.jpg|images/contrast-final.png"
                data-name="images/contrast-final.jpg" onerror="imgFallback(this)">
@@ -337,9 +347,9 @@ footer p{color:var(--grey);margin:0;letter-spacing:.14em}
 
       <article class="project">
         <div class="shot">
-          <img src="images/thumbs/art-01-choice-machine.jpg" alt="The Choice Machine illustration" loading="lazy"
-               data-try="images/art-01-choice-machine.jpg|images/art-01-choice-machine.png"
-               data-name="images/art-01-choice-machine.jpg" onerror="imgFallback(this)">
+          <img src="images/thumbs/art-03-escaping-the-bite.jpg" alt="Escaping the Bite illustration" loading="lazy"
+               data-try="images/art-03-escaping-the-bite.jpg|images/art-03-escaping-the-bite.png"
+               data-name="images/art-03-escaping-the-bite.jpg" onerror="imgFallback(this)">
         </div>
         <div class="pbody">
           <h3>Ink Studies</h3>
@@ -513,7 +523,7 @@ const ART = [
   },
   {
     id:'graffiti', title:'exploring the bold style of graffiti', year:'2025',
-    images:['art-07-graffiti-01.jpg','art-07-graffiti-02.jpg','art-07-graffiti-03.jpg','art-07-graffiti-04.jpg','art-07-graffiti-05.jpg'],
+    images:['art-07-graffiti-02.jpg','art-07-graffiti-04.jpg','art-07-graffiti-01.jpg','art-07-graffiti-03.jpg','art-07-graffiti-05.jpg'],
     text:[
       `I have always been drawn to graffiti — the boldness, but also what it represents. Freedom of expression, and rebellion against monotony. Graffiti reclaims urban space by injecting colour and personality into industrial, minimal environments that otherwise feel lifeless and rigid.`,
       `Through vivid colour, exaggerated form and dynamic lettering, this series takes that spirit as a way of escaping the ordinary. Drawing on my favourite games, and of course, food.`
@@ -521,7 +531,7 @@ const ART = [
   },
   {
     id:'sketchbook', title:'a collection from my sketchbook', year:'2025',
-    images:['art-08-sketchbook-01.jpg','art-08-sketchbook-02.jpg','art-08-sketchbook-03.jpg','art-08-sketchbook-04.jpg'],
+    images:['art-08-sketchbook-02.jpg','art-08-sketchbook-01.jpg','art-08-sketchbook-03.jpg','art-08-sketchbook-04.jpg'],
     text:[
       `Loose pages, unfinished ideas, and the things that never became a series. This is where most of the others started.`
     ]
